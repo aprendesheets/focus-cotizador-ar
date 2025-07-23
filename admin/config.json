@@ -1,0 +1,12 @@
+{
+    "condiciones": {
+        "50% adelanto y 50% contra-entrega": "50% adelanto y 50% contra-entrega",
+        "Pago contra-entrega": "Pago contra-entrega",
+        "Pago 30 días fecha facturación": "Pago 30 días fecha facturación",
+        "Pago 60 días fecha facturación": "Pago 60 días fecha facturación",
+        "A convenir": "A convenir"
+    },
+    "mensaje_final": "Precios en pesos más IVA y por unidad, válidos por 72hs.\r\nPlazo de entrega: 15 días (contados a partir de la aprobación de muestra digital y anticipo acreditado) \r\nEntrega en CABA sin Cargo \/ AMBA hasta 25km $15.000+IVA \/ AMBA más de 25km $30.000+IVA \r\nDespachos al interior con cargo al cliente, puesto en transporte sin cargo. \r\n\r\n\r\n¡Muchas gracias por trabajar con nosotros!\r\nwww.focuslogo.com.ar \/ info@focuslogo.com.ar",
+    "descuento_maximo": 25,
+    "html_pdf": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <style>\r\n        body { font-family: Arial, sans-serif; font-size: 13px; color: #333; }\r\n        h1, h2, h3 { color: #02196f; margin-bottom: 0.5rem; }\r\n        .header { margin-bottom: 2rem; }\r\n        table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }\r\n        th, td { padding: 8px; border: 1px solid #ccc; }\r\n        .producto { margin-bottom: 1.5rem; padding-bottom: 1rem; }\r\n        .propuestas th, .propuestas td { text-align: center; } \/* ✅ solo propuestas centradas *\/\r\n        .footer { font-size: 12px; margin-top: 1rem; color: #666; }\r\n        .observaciones { margin-top: 4px; white-space: pre-wrap; }\r\n        .descripcion { font-style: italic; font-size: 12px; color: #555; margin-top: 8px; }\r\n    <\/style>\r\n<\/head>\r\n<body>\r\n\r\n<div class=\"header\" style=\"text-align: center; width: 100%;\">\r\n    <div style=\"margin: 0;\">\r\n        <img src=\"https:\/\/focuslogo.cl\/wp-content\/uploads\/2025\/04\/Focuslogo.png\" style=\"width: 100%; height: auto;\">\r\n    <\/div>\r\n<\/div>\r\n\r\n<p>\r\n    Empresa: <strong>{{empresa}}<\/strong><br>\r\n    Contacto: <strong>{{cliente}}<\/strong><br>\r\n    Email: <strong>{{email}}<\/strong><br>\r\n    Ejecutivo: <strong>{{vendedor}}<\/strong><br>\r\n    Fecha: <strong>{{fecha}}<\/strong>\r\n<\/p>\r\n\r\n<h2>Productos<\/h2>\r\n{{productos}}\r\n\r\n<p><strong>Condiciones comerciales:<\/strong> {{condiciones}}<\/p>\r\n\r\n<div class=\"footer\">\r\n    <p>{{mensaje_final}}<\/p>\r\n<\/div>\r\n\r\n<\/body>\r\n<\/html>\r\n"
+}
