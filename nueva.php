@@ -246,7 +246,7 @@ const imagenes = [
 
     // Búsqueda AJAX de productos
     input.addEventListener('input', function () {
-        const term = this.value;
+        const term = this.value.trim();
         if (term.length < 3) {
             resultados.innerHTML = '';
             return;

@@ -29,7 +29,8 @@ if ($accion === 'buscar') {
     if ($query->have_posts()) {
         foreach ($query->posts as $post) {
             $product = wc_get_product($post->ID);
-            if (!$product || !$product->is_in_stock()) continue;
+            // se permite mostrar productos sin stock para evitar que queden fuera de las búsquedas
+            if (!$product) continue;
 
             $moq = get_post_meta($post->ID, 'min_quantity', true);
             $moq = intval($moq) ?: 1;
