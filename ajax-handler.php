@@ -32,6 +32,21 @@ if ($accion === 'buscar') {
             // se permite mostrar productos sin stock para evitar que queden fuera de las búsquedas
             if (!$product) continue;
 
+            $price = $product->get_price();
+            if ($price === '' || $price === null || !is_numeric($price)) {
+                $price = '';
+                if ($product->is_type('variable')) {
+                    foreach ($product->get_children() as $child_id) {
+                        $child = wc_get_product($child_id);
+                        $child_price = $child ? $child->get_price() : '';
+                        if ($child_price !== '' && $child_price !== null && is_numeric($child_price)) {
+                            $price = $child_price;
+                            break;
+                        }
+                    }
+                }
+            }
+
             $moq = get_post_meta($post->ID, 'min_quantity', true);
             $moq = intval($moq) ?: 1;
 
@@ -52,7 +67,7 @@ $results[] = [
     'id'          => $product->get_id(),
     'name'        => $product->get_name(),
     'sku'         => $product->get_sku(),
-    'price'       => $product->get_price(),
+    'price'       => ($price !== '' ? floatval($price) : 0),
     'moq'         => $moq,
     'image'       => $imagenes[0] ?? '',
     'imagenes'    => $imagenes,

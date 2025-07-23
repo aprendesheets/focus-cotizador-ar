@@ -262,17 +262,18 @@ const imagenes = [
                     li.style.display = 'flex';
                     li.style.alignItems = 'center';
                     li.style.borderBottom = '1px solid #eee';
+                    const precioNum = parseFloat(producto.price);
                     li.innerHTML = `
                         <img src="${producto.image}" width="40" height="40" style="border-radius:6px; margin-right:10px;">
                         <div>
                             <strong>${producto.name}</strong><br>
-                            <small>SKU: ${producto.sku} | $${parseFloat(producto.price).toLocaleString()}</small>
+                            <small>SKU: ${producto.sku} | $${isNaN(precioNum) ? '0' : precioNum.toLocaleString()}</small>
                         </div>`;
                     li.addEventListener('click', () => {
                         agregarProducto({
                             name: producto.name,
                             sku: producto.sku,
-                            price: producto.price,
+                            price: isNaN(precioNum) ? 0 : precioNum,
                             moq: producto.moq,
                             imagenes: producto.imagenes,
                             image: producto.image,
