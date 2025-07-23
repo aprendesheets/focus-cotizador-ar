@@ -78,7 +78,23 @@ $results[] = [
         }
     }
 
-    wp_send_json($results);
+    // 👉 Agrupar por SKU/ID, priorizando precios mayores a cero
+    $agrupados = [];
+    foreach ($results as $r) {
+        $clave = $r['sku'] ?: $r['id'];
+        if (!isset($agrupados[$clave]) || ($agrupados[$clave]['price'] <= 0 && $r['price'] > 0)) {
+            $agrupados[$clave] = $r;
+        }
+    }
+
+    $ordenados = array_values($agrupados);
+    usort($ordenados, function ($a, $b) {
+        if ($a['price'] > 0 && $b['price'] <= 0) return -1;
+        if ($a['price'] <= 0 && $b['price'] > 0) return 1;
+        return 0;
+    });
+
+    wp_send_json($ordenados);
 }
 
 
