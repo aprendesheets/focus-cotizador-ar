@@ -48,6 +48,11 @@ if ($accion === 'buscar') {
                 }
             }
 
+            $price_val = ($price !== '' ? floatval($price) : 0);
+            if ($price_val <= 0) {
+                continue; // omitir productos sin precio válido
+            }
+
             $moq = get_post_meta($post->ID, 'min_quantity', true);
             $moq = intval($moq) ?: 1;
 
@@ -68,7 +73,7 @@ $results[] = [
     'id'          => $product->get_id(),
     'name'        => $product->get_name(),
     'sku'         => $product->get_sku(),
-    'price'       => ($price !== '' ? floatval($price) : 0),
+    'price'       => $price_val,
     'moq'         => $moq,
     'image'       => $imagenes[0] ?? '',
     'imagenes'    => $imagenes,
