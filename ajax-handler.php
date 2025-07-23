@@ -33,16 +33,17 @@ if ($accion === 'buscar') {
             if (!$product) continue;
 
             $price = $product->get_price();
-            if ($price === '' || $price === null || !is_numeric($price)) {
-                $price = '';
-                if ($product->is_type('variable')) {
-                    foreach ($product->get_children() as $child_id) {
-                        $child = wc_get_product($child_id);
-                        $child_price = $child ? $child->get_price() : '';
-                        if ($child_price !== '' && $child_price !== null && is_numeric($child_price)) {
-                            $price = $child_price;
-                            break;
-                        }
+
+            // Si el precio está vacío o es menor o igual a cero, y es un producto
+            // variable, intentamos obtener el precio de alguna variación
+            if (($price === '' || $price === null || !is_numeric($price) || floatval($price) <= 0)
+                && $product->is_type('variable')) {
+                foreach ($product->get_children() as $child_id) {
+                    $child = wc_get_product($child_id);
+                    $child_price = $child ? $child->get_price() : '';
+                    if ($child_price !== '' && $child_price !== null && is_numeric($child_price) && floatval($child_price) > 0) {
+                        $price = $child_price;
+                        break;
                     }
                 }
             }
