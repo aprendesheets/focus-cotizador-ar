@@ -20,7 +20,8 @@ if ($accion === 'buscar') {
         'post_type'      => 'product',
         'post_status'    => 'publish',
         's'              => $term,
-        'posts_per_page' => 6,
+        // buscamos más productos en caso de que varios sean filtrados luego
+        'posts_per_page' => 20,
     ];
 
     $query = new WP_Query($args);
@@ -100,7 +101,8 @@ $results[] = [
         return 0;
     });
 
-    wp_send_json($ordenados);
+    // limitamos la respuesta a 6 productos
+    wp_send_json(array_slice($ordenados, 0, 6));
 }
 
 
